@@ -20,7 +20,7 @@ spec:
         - name: registry-creds
       containers:
       - name: devops-admin-devops
-        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-devops-admin:16
+        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-devops-admin:17
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:

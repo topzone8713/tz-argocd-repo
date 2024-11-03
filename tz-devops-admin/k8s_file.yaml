@@ -20,7 +20,7 @@ spec:
         - name: registry-creds
       containers:
       - name: devops-admin-devops
-        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-devops-admin:35
+        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-devops-admin:36
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
@@ -85,19 +85,8 @@ spec:
             name: devops-admin-devops
             port:
               number: 80
-  - host: admin.devops.topzone.me
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: devops-admin-devops
-            port:
-              number: 80
   tls:
     - hosts:
         - devops-admin.devops-dev.topzone-k8s.topzone.me
-        - admin.devops.topzone.me
       secretName: devops-admin-devops
 

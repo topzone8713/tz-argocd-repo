@@ -20,12 +20,12 @@ spec:
         - name: registry-creds
       containers:
       - name: tz-demo-app-devops
-        image: 336363860990.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:14
+        image: 336363860990.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:15
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
 #            path: /health
-#            port: 8000
+#            port: 3000
         resources:
           requests:
             cpu: 500m
@@ -49,7 +49,7 @@ spec:
   ports:
     - port: 80
       name: api-80
-      targetPort: 8000
+      targetPort: 3000
 
 ---
 

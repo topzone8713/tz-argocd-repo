@@ -20,7 +20,7 @@ spec:
         - name: registry-creds
       containers:
       - name: tz-demo-app-devops
-        image: 336363860990.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:15
+        image: 336363860990.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:16
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
@@ -36,6 +36,8 @@ spec:
         envFrom:
         - configMapRef:
             name: tz-demo-app-configmap
+        - secretRef:
+            name: tz-demo-app-dev-es
 
 ---
 apiVersion: v1
@@ -52,7 +54,6 @@ spec:
       targetPort: 3000
 
 ---
-
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -89,4 +90,20 @@ spec:
     - hosts:
         - devops-demo-app.devops-dev.eks-main-t.seerslab.io
       secretName: tz-demo-app-devops
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: tz-demo-app-dev-es
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: devops-dev
+    kind: SecretStore
+  target:
+    name: tz-demo-app-dev-es
+  dataFrom:
+    - extract:
+        key: secret/devops-dev/tz-demo-app
 

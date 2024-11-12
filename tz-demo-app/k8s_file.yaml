@@ -20,7 +20,7 @@ spec:
         - name: registry-creds
       containers:
       - name: tz-demo-app-devops
-        image: 336363860990.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:16
+        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:4
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
@@ -76,7 +76,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
-  - host: devops-demo-app.devops-dev.eks-main-t.seerslab.io
+  - host: devops-demo-app.devops-dev.topzone-k8s.topzone.me
     http:
       paths:
       - path: /
@@ -88,7 +88,7 @@ spec:
               number: 80
   tls:
     - hosts:
-        - devops-demo-app.devops-dev.eks-main-t.seerslab.io
+        - devops-demo-app.devops-dev.topzone-k8s.topzone.me
       secretName: tz-demo-app-devops
 
 ---

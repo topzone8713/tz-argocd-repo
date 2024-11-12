@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devops-admin-devops2
+  name: devops-admin-devops
 spec:
   selector:
     matchLabels:
-      app: devops-admin-devops2
+      app: devops-admin-devops
   replicas: 1
   template:
     metadata:
@@ -14,13 +14,13 @@ spec:
         team: devops
         project: admin
         environment: dev
-        app: devops-admin-devops2
+        app: devops-admin-devops
     spec:
       imagePullSecrets:
         - name: registry-creds
       containers:
-      - name: devops-admin-devops2
-        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-devops-admin:10
+      - name: devops-admin-devops
+        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-devops-admin:11
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
@@ -41,11 +41,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: devops-admin-devops2
+  name: devops-admin-devops
 spec:
   type: NodePort
   selector:
-    app: devops-admin-devops2
+    app: devops-admin-devops
   ports:
     - port: 80
       name: api-80
@@ -58,7 +58,7 @@ kind: ConfigMap
 metadata:
   name: devops-admin-configmap
 data:
-  GIT_BRANCH: devops2
+  GIT_BRANCH: devops
   DB_HOSTNAME: host.docker.internal
   DB_R_HOSTNAME: host.docker.internal
 
@@ -67,7 +67,7 @@ data:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: devops-admin-devops2
+  name: devops-admin-devops
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
@@ -75,18 +75,18 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
-  - host: devops2-admin.devops-dev.topzone-k8s.topzone.me
+  - host: devops-admin.devops-dev.topzone-k8s.topzone.me
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: devops-admin-devops2
+            name: devops-admin-devops
             port:
               number: 80
   tls:
     - hosts:
-        - devops2-admin.devops-dev.topzone-k8s.topzone.me
-      secretName: devops-admin-devops2
+        - devops-admin.devops-dev.topzone-k8s.topzone.me
+      secretName: devops-admin-devops
 

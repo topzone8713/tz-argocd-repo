@@ -22,10 +22,17 @@ spec:
       - name: tz-demo-app-devops
         image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:7
         imagePullPolicy: Always
-#        readinessProbe:
-#          httpGet:
-#            path: /health
-#            port: 3001
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 1
         resources:
           requests:
             cpu: 50m

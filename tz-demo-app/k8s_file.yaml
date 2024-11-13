@@ -20,7 +20,7 @@ spec:
         - name: registry-creds
       containers:
       - name: tz-demo-app-devops
-        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:6
+        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:1
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:

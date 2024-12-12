@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tz-demo-app-devops
+  name: tz-demo-app-vagrant
 spec:
   selector:
     matchLabels:
-      app: tz-demo-app-devops
+      app: tz-demo-app-vagrant
   replicas: 1
   template:
     metadata:
@@ -14,25 +14,18 @@ spec:
         team: devops
         project: admin
         environment: dev
-        app: tz-demo-app-devops
+        app: tz-demo-app-vagrant
     spec:
       imagePullSecrets:
         - name: registry-creds
       containers:
-      - name: tz-demo-app-devops
-        image: 596627550572.dkr.ecr.ap-northeast-2.amazonaws.com/tz-demo-app:7
+      - name: tz-demo-app-vagrant
+        image: harbor.default.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:28
         imagePullPolicy: Always
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          failureThreshold: 1
+#        readinessProbe:
+#          httpGet:
+#            path: /health
+#            port: 3001
         resources:
           requests:
             cpu: 50m
@@ -50,11 +43,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tz-demo-app-devops
+  name: tz-demo-app-vagrant
 spec:
   type: NodePort
   selector:
-    app: tz-demo-app-devops
+    app: tz-demo-app-vagrant
   ports:
     - port: 80
       name: api-80
@@ -66,7 +59,7 @@ kind: ConfigMap
 metadata:
   name: tz-demo-app-configmap
 data:
-  GIT_BRANCH: devops
+  GIT_BRANCH: vagrant
   DB_HOSTNAME: host.docker.internal
   DB_R_HOSTNAME: host.docker.internal
 
@@ -75,7 +68,7 @@ data:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: tz-demo-app-devops
+  name: tz-demo-app-vagrant
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
@@ -83,20 +76,20 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
-  - host: devops-demo-app.devops-dev.topzone-k8s.topzone.me
+  - host: vagrant-demo-app.devops-dev.topzone-k8s.topzone.me
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: tz-demo-app-devops
+            name: tz-demo-app-vagrant
             port:
               number: 80
   tls:
     - hosts:
-        - devops-demo-app.devops-dev.topzone-k8s.topzone.me
-      secretName: tz-demo-app-devops
+        - vagrant-demo-app.devops-dev.topzone-k8s.topzone.me
+      secretName: tz-demo-app-vagrant
 
 ---
 apiVersion: external-secrets.io/v1beta1

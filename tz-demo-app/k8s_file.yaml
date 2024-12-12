@@ -20,7 +20,7 @@ spec:
         - name: registry-creds
       containers:
       - name: tz-demo-app-vagrant
-        image: harbor.default.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:27
+        image: harbor.default.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:28
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:

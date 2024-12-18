@@ -20,7 +20,7 @@ spec:
         - name: tz-registrykey
       containers:
       - name: tz-demo-app-vagrant
-        image: harbor.harbor.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:32
+        image: harbor.harbor.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:33
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:

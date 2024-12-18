@@ -18,6 +18,10 @@ spec:
     spec:
       imagePullSecrets:
         - name: tz-registrykey
+      hostAliases:
+      - ip: "192.168.86.200"
+        hostnames:
+        - "harbor.harbor.topzone-k8s.topzone.me"
       containers:
       - name: tz-demo-app-vagrant
         image: harbor.harbor.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:44

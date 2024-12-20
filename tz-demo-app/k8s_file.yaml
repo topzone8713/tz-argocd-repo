@@ -19,14 +19,14 @@ spec:
       hostAliases:
       - ip: "192.168.86.200"
         hostnames:
-        - "harbor.harbor.topzone-k8s.topzone.me"
+        - "harbor.harbor.topzone-k8s.topzone.com"
       imagePullSecrets:
         - name: tz-registrykey
         - name: harbor-secret
       serviceAccountName: devops-dev-svcaccount
       containers:
       - name: tz-demo-app-vagrant
-        image: harbor.harbor.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:1
+        image: harbor.harbor.topzone-k8s.topzone.com/topzone-k8s/tz-demo-app:3
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
@@ -81,7 +81,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
-  - host: vagrant-demo-app.devops-dev.topzone-k8s.topzone.me
+  - host: vagrant-demo-app.devops-dev.topzone-k8s.topzone.com
     http:
       paths:
       - path: /
@@ -93,7 +93,7 @@ spec:
               number: 80
   tls:
     - hosts:
-        - vagrant-demo-app.devops-dev.topzone-k8s.topzone.me
+        - vagrant-demo-app.devops-dev.topzone-k8s.topzone.com
       secretName: tz-demo-app-vagrant
 
 ---

@@ -25,7 +25,7 @@ spec:
       serviceAccountName: devops-dev-svcaccount
       containers:
       - name: tz-demo-app-vagrant
-        image: harbor.harbor.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:7
+        image: harbor.harbor.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:12
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
@@ -80,7 +80,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
-  - host: vagrant-demo-app.devops-dev.topzone-k8s.topzone.com
+  - host: vagrant-demo-app.devops-dev.topzone-k8s.topzone.me
     http:
       paths:
       - path: /
@@ -92,7 +92,7 @@ spec:
               number: 80
   tls:
     - hosts:
-        - vagrant-demo-app.devops-dev.topzone-k8s.topzone.com
+        - vagrant-demo-app.devops-dev.topzone-k8s.topzone.me
       secretName: tz-demo-app-vagrant
 
 ---

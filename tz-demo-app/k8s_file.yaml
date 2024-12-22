@@ -25,7 +25,7 @@ spec:
       serviceAccountName: devops-dev-svcaccount
       containers:
       - name: tz-demo-app-vagrant
-        image: harbor.harbor.topzone-k8s.topzone.com/topzone-k8s/tz-demo-app:7
+        image: harbor.harbor.topzone-k8s.topzone.me/topzone-k8s/tz-demo-app:7
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
